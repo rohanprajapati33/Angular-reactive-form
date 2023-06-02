@@ -1,0 +1,36 @@
+// constructor ( private formBuilder : FormBuilder){}
+
+//   loginForm = new FormGroup({
+//     user: new FormControl('Rohan', [Validators.required]),
+//     password: new FormControl('', [
+//       Validators.required,
+//       Validators.minLength(5),
+//     ]),
+//     street: new FormControl('',[Validators.required]),
+//     city: new FormControl('',[Validators.required]),
+//     state: new FormControl('',[Validators.required]),
+//     zip: new FormControl(''),
+//     hobbies : new FormArray([])
+//   });
+//   loginUser() {
+//     console.log(this.loginForm.value);
+//   }
+//   get user() {
+//     return this.loginForm.get('user');
+//   }
+//   get password() {
+//     return this.loginForm.get('password');
+//   }
+//   get street (){
+//     return this.loginForm.get('street')
+//   }
+//   get city(){
+//     return this.loginForm.get('city')
+//   }
+//   get state(){
+//     return this.loginForm.get('state')
+//   } 
+
+
+
+// <span *ngIf="title.invalid && (title.touched || submitted)"></span>
