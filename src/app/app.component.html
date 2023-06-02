@@ -72,9 +72,9 @@
     <br>
     <tbody formArrayName="gaugeTitles" *ngFor="let item of gaugeTitleFormArray.controls; let i = index;">
       <tr [formGroupName]="i">
-
         <td>
-          <input type="text" *ngIf="!item.get('isEditable')?.value" formControlName="empname"
+          <input type="text" *ngIf="!item.get('isEditable')?.value && item.get('selectEmpData')?.value != 'empname'"
+           formControlName="empname"
             placeholder="Employee Name" name="empname">
           <br>
           <span class="validation"
@@ -84,7 +84,7 @@
         </td>
 
         <td>
-          <input type="text" *ngIf="!item.get('isEditable')?.value" formControlName="uniname"
+          <input type="text" *ngIf="!item.get('isEditable')?.value && item.get('selectEmpData')?.value != 'uniname'" formControlName="uniname"
             placeholder="University Name"><br>
           <span class="validation"
             *ngIf="item.get('uniname')?.invalid && (item.get('uniname')?.touched || submitted)">University name is
@@ -94,14 +94,14 @@
         </td>
 
         <td>
-          <input type="text" *ngIf="!item.get('isEditable')?.value" formControlName="result" placeholder="Result"><br>
+          <input type="text" *ngIf="!item.get('isEditable')?.value && item.get('selectEmpData')?.value != 'result'" formControlName="result" placeholder="Result"><br>
           <span class="validation"
             *ngIf="item.get('result')?.invalid && (item.get('result')?.touched || submitted)">Result is required</span>
           <span *ngIf="item.get('isEditable')?.value">{{item.get('result')?.value}}</span>
         </td>
 
         <td>
-          <input type="text" *ngIf="!item.get('isEditable')?.value" formControlName="yearofpassing"
+          <input type="text" *ngIf="!item.get('isEditable')?.value && item.get('selectEmpData')?.value != 'yearofpassing'" formControlName="yearofpassing"
             placeholder="YearofPassing"><br>
           <span class="validation"
             *ngIf="item.get('yearofpassing')?.invalid && (item.get('yearofpassing')?.touched || submitted)">Passing Year
@@ -118,7 +118,7 @@
 
 
         <td>
-          <select  name="select" id="select" (change)="onChange($event, i)">
+          <select formControlName="selectEmpData" name="select" id="select" (change)="onChange($event, i)" >
             <option value="none">None</option>
             <option value="empname">Employee Name</option>
             <option value="uniname">University Name</option>

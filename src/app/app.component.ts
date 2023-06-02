@@ -112,7 +112,7 @@ export class AppComponent {
   gaugeTitles: any;
   submitted = false;
   empname!: string;
-  form: any;
+ 
 
   // display:any =  true;
   disabled = true;
@@ -121,6 +121,8 @@ export class AppComponent {
   // empData:any;
   isEdit = false;
   validation = false;
+  isEditable= true;
+  
 
   get gaugeTitleFormArray() {
     return this.gaugeTitleForm.get('gaugeTitles') as FormArray;
@@ -141,6 +143,8 @@ export class AppComponent {
       result: ['', Validators.required],
       yearofpassing: ['', Validators.required],
       isEditable: [false],
+      selectEmpData : ['']
+      
    
     });
   }
@@ -184,18 +188,28 @@ export class AppComponent {
 
 
   onChange(event: any, i: number) {
+    
     const value = event.target.value;
-    // const indexControl = this.gaugeTitleFormArray.controls[i];
+    
+    //  const indexControl = this.gaugeTitleFormArray.controls[i];
+    // if (this.gaugeTitleForm.value) {
+    //   return
+    // }
 
-    if (!value) return;
+    
 
-    if (value === 'empname') {
-      this.gaugeTitleFormArray.controls[i].get('empname')?.clearValidators();
-      this.gaugeTitleFormArray.controls[i].get('empname')?.updateValueAndValidity();
-    } else {
-      this.gaugeTitleFormArray.controls[i].get('empname')?.setValidators(Validators.required);
-      this.gaugeTitleFormArray.controls[i].get('empname')?.updateValueAndValidity();
-    }
+    // value.get('isEditable').setValue(false);
+
+    
+    // if (!value) return;
+    // if (value === 'empname') {
+    //   this.gaugeTitleFormArray.controls[i].get('empname')?.clearValidators();
+    //   this.gaugeTitleFormArray.controls[i].get('empname')?.updateValueAndValidity();
+    // } else {
+    //   // value.get('isEditable').setValue(true);
+    //   this.gaugeTitleFormArray.controls[i].get('empname')?.setValidators(Validators.required);
+    //   this.gaugeTitleFormArray.controls[i].get('empname')?.updateValueAndValidity();
+    // }
     if (value === 'uniname') {
       this.gaugeTitleFormArray.controls[i].get('uniname')?.clearValidators();
       this.gaugeTitleFormArray.controls[i].get('uniname')?.updateValueAndValidity();
