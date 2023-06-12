@@ -7,6 +7,8 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormServiceService } from './form-service.service';
 
 @Component({
   selector: 'app-root',
@@ -108,134 +110,172 @@ export class AppComponent {
   //   console.log(this.empForm.value);
   // }
 
-  gaugeTitleForm!: FormGroup;
-  gaugeTitles: any;
-  submitted = false;
-  empname!: string;
+  // Employee form data ts file start
+
+  // gaugeTitleForm!: FormGroup;
+  // gaugeTitles: any;
+  // submitted = false;
+  // data: any;
+  // // empname!: string;
  
 
-  // display:any =  true;
-  disabled = true;
-  //  hide:any=true;
-  //ishide=true;
-  // empData:any;
-  isEdit = false;
-  validation = false;
-  isEditable= true;
+  // // display:any =  true;
+  // // disabled = true;
+  // //  hide:any=true;
+  // //ishide=true;
+  // // empData:any;
+  // // isEdit = false;
+  // // validation = false;
+  // // isEditable= true;
   
 
-  get gaugeTitleFormArray() {
-    return this.gaugeTitleForm.get('gaugeTitles') as FormArray;
-  }
+  // get gaugeTitleFormArray() {
+  //   return this.gaugeTitleForm.get('gaugeTitles') as FormArray;
+  // }
 
-  constructor(private formBuilder: FormBuilder) {}
+  // constructor(private formBuilder: FormBuilder,private router:Router, private notifications: FormServiceService ) {}
 
-  ngOnInit() {
-    this.gaugeTitleForm = this.formBuilder.group({
-      gaugeTitles: this.formBuilder.array([this.getRowDataForm()]),
-    });
-  }
-
-  getRowDataForm() {
-    return this.formBuilder.group({
-      empname: ['', Validators.required],
-      uniname: ['', Validators.required],
-      result: ['', Validators.required],
-      yearofpassing: ['', Validators.required],
-      isEditable: [false],
-      selectEmpData : ['']
-      
+  // ngOnInit() {
+  //   this.gaugeTitleForm = this.formBuilder.group({
+  //     gaugeTitles: this.formBuilder.array([this.getRowDataForm()]),
+  //   });
    
-    });
-  }
+  // }
 
-  addItem(): void {
-    this.submitted = false;
-    if (this.gaugeTitleForm.invalid) return;
+  // getRowDataForm() {
+  //   return this.formBuilder.group({
+  //     empname: ['', Validators.required],
+  //     uniname: ['', Validators.required],
+  //     result: ['', Validators.required],
+  //     yearofpassing: ['', Validators.required],
+  //     isEditable: [false],
+  //     selectEmpData : ['']
+  //   });
+  // }
 
-    this.gaugeTitles = this.gaugeTitleForm.get('gaugeTitles') as FormArray;
+  // addItem(): void {
+  //   this.submitted = false;
+  //   if (this.gaugeTitleForm.invalid) return;
 
-    const form = this.getRowDataForm();
-    this.gaugeTitles.push(form);
-    // this.markAllGroupsAsPristine();
-  }
+  //   this.gaugeTitles = this.gaugeTitleForm.get('gaugeTitles') as FormArray;
 
-  save(item: any) {
-    console.log(this.gaugeTitleForm.value);
-    this.submitted = true;
-    if (this.gaugeTitleForm.invalid) {
-      return;
-    }
+  //   const form = this.getRowDataForm();
+  //   this.gaugeTitles.push(form);  
+  //   // this.markAllGroupsAsPristine();
+  // }
 
-    item.get('isEditable').setValue(true);
-    // item.get('isEditable').setValue(false);
+  // // showData(){
+  // //   this.gaugeTitles = JSON.parse(localStorage.getItem('form-data')as any) ;
+  // //   return this.gaugeTitles
+  // // }
 
-    //  {{this.empname}}
-    // this.disabled="!gaugeTitleForm.valid"
-    //  console.log(item);
-    //  this.display = true;
-    // this.hide = !this.hide;
-  }
-
-  onEdit(item: any) {
-    item.get('isEditable').setValue(false);
-  }
-
-  removeRow(index: number) {
-    console.log(index);
-    (<FormArray>this.gaugeTitleForm.get('gaugeTitles')).removeAt(index);
-  }
-
-
-  onChange(event: any, i: number) {
+  // save(item: any) {
+  //   console.log(this.gaugeTitleForm.value);
+  //   console.log(this.gaugeTitleFormArray.value);
     
-    const value = event.target.value;
+  //   this.submitted = true;
+  //   if (this.gaugeTitleForm.invalid) {
+  //     return;
+  //   }
+  //   item.get('isEditable').setValue(true);
+  //   localStorage.setItem('form-data',JSON.stringify(this.gaugeTitleFormArray.value));
+  //   // this.data = this.showData();
     
-    //  const indexControl = this.gaugeTitleFormArray.controls[i];
-    // if (this.gaugeTitleForm.value) {
-    //   return
-    // }
+   
+     
+    
+  //   // item.get('isEditable').setValue(false);
+
+  //   //  {{this.empname}}
+  //   // this.disabled="!gaugeTitleForm.valid"
+  //   //  console.log(item);
+  //   //  this.display = true;
+  //   // this.hide = !this.hide;
+  // }
+
+
+
+  // onEdit(item: any) {
+  //   item.get('isEditable').setValue(false);
+  // }
+
+  // removeRow(index: number) {
+  //   console.log(index);
+  //   (<FormArray>this.gaugeTitleForm.get('gaugeTitles')).removeAt(index);
+  //   localStorage.removeItem('form-data');
+  // }
+
+  // viewAllData(){
+  //   if (this.gaugeTitleForm.invalid) {
+  //     return;
+  //   }
+  //   this.router.navigate(['/viewall']);
+  // }
+
+  // // view(i: any){
+  // //   this.router.navigate(['/view']); 
+  // // }
+
+  // // sendMessage(){
+  // //   // const msg = this.gaugeTitleForm.get('form-data')!.value;
+  // //   // this.notifications.sendNotificatiion(msg!);
+  // // }
+
+  // onChange(event: any, i: number) {
+
+  //   const value = event.target.value;
+    
+  //   //  const indexControl = this.gaugeTitleFormArray.controls[i];
+  //   // if (this.gaugeTitleForm.value) {
+  //   //   return
+  //   // }
 
     
 
-    // value.get('isEditable').setValue(false);
+  //   // value.get('isEditable').setValue(false);
 
     
-    // if (!value) return;
-    // if (value === 'empname') {
-    //   this.gaugeTitleFormArray.controls[i].get('empname')?.clearValidators();
-    //   this.gaugeTitleFormArray.controls[i].get('empname')?.updateValueAndValidity();
-    // } else {
-    //   // value.get('isEditable').setValue(true);
-    //   this.gaugeTitleFormArray.controls[i].get('empname')?.setValidators(Validators.required);
-    //   this.gaugeTitleFormArray.controls[i].get('empname')?.updateValueAndValidity();
-    // }
-    if (value === 'uniname') {
-      this.gaugeTitleFormArray.controls[i].get('uniname')?.clearValidators();
-      this.gaugeTitleFormArray.controls[i].get('uniname')?.updateValueAndValidity();
-    } else {
-      this.gaugeTitleFormArray.controls[i].get('uniname')?.setValidators(Validators.required);
-      this.gaugeTitleFormArray.controls[i].get('uniname')?.updateValueAndValidity();
-    }
-    if (value === 'result') {
-      this.gaugeTitleFormArray.controls[i].get('result')?.clearValidators();
-      this.gaugeTitleFormArray.controls[i].get('result')?.updateValueAndValidity();
-    } else {
-      this.gaugeTitleFormArray.controls[i].get('result')?.setValidators(Validators.required);
-      this.gaugeTitleFormArray.controls[i].get('result')?.updateValueAndValidity();
-    }
-    if (value === 'yearofpassing') {
-      this.gaugeTitleFormArray.controls[i].get('yearofpassing')?.clearValidators();
-      this.gaugeTitleFormArray.controls[i].get('yearofpassing')?.updateValueAndValidity();
-    } else {
-      this.gaugeTitleFormArray.controls[i].get('yearofpassing')?.setValidators(Validators.required);
-      this.gaugeTitleFormArray.controls[i].get('yearofpassing')?.updateValueAndValidity();
-    }
-  }
+  //   if (!value) return;
+  //   if (value === 'empname') {
+  //     this.gaugeTitleFormArray.controls[i].get('empname')?.clearValidators();
+  //     this.gaugeTitleFormArray.controls[i].get('empname')?.updateValueAndValidity();
+  //   } else {
+  //     // value.get('isEditable').setValue(true);
+  //     this.gaugeTitleFormArray.controls[i].get('empname')?.setValidators(Validators.required);
+  //     this.gaugeTitleFormArray.controls[i].get('empname')?.updateValueAndValidity();
+  //   }
+  //   if (value === 'uniname') {
+  //     this.gaugeTitleFormArray.controls[i].get('uniname')?.clearValidators();
+  //     this.gaugeTitleFormArray.controls[i].get('uniname')?.updateValueAndValidity();
+  //   } else {
+  //     this.gaugeTitleFormArray.controls[i].get('uniname')?.setValidators(Validators.required);
+  //     this.gaugeTitleFormArray.controls[i].get('uniname')?.updateValueAndValidity();
+  //   }
+  //   if (value === 'result') {
+  //     this.gaugeTitleFormArray.controls[i].get('result')?.clearValidators();
+  //     this.gaugeTitleFormArray.controls[i].get('result')?.updateValueAndValidity();
+  //   } else {
+  //     this.gaugeTitleFormArray.controls[i].get('result')?.setValidators(Validators.required);
+  //     this.gaugeTitleFormArray.controls[i].get('result')?.updateValueAndValidity();
+  //   }
+  //   if (value === 'yearofpassing') {
+  //     this.gaugeTitleFormArray.controls[i].get('yearofpassing')?.clearValidators();
+  //     this.gaugeTitleFormArray.controls[i].get('yearofpassing')?.updateValueAndValidity();
+  //   } else {
+  //     this.gaugeTitleFormArray.controls[i].get('yearofpassing')?.setValidators(Validators.required);
+  //     this.gaugeTitleFormArray.controls[i].get('yearofpassing')?.updateValueAndValidity();
+  //   }
+  // }
+
+   // Employee form data ts file end
 
   // this.gaugeTitleForm.get('gaugeTitles')?.clearValidators
 }
 
+
+// function item(this: any, key: string, value: any) {
+//   throw new Error('Function not implemented.');
+// }
 // markAllGroupsAsPristine() {
 //   for (const control of this.gaugeTitleFormArray.controls) {
 //     control.markAsUntouched();

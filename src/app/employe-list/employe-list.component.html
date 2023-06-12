@@ -1,0 +1,94 @@
+<form [formGroup]="gaugeTitleForm">
+    <button *ngIf="!isView" class="btn" (click)="addItem()" type="button">+Add Education</button>
+    <!-- "firstname.invalid && (firstname.touched || submitted)" -->
+    <table>
+      <thead>
+        <tr>
+          <td>Employee Name</td>
+          <td>University Name</td>
+          <td>Result</td>
+          <td>Year Of passing</td>
+          <td *ngIf="!isView">
+            Action
+           <button *ngIf="!isView" [disabled]="gaugeTitleForm.invalid" routerLink="/viewall">ViewAll</button>
+          </td>
+          
+          <td *ngIf="!isView">Select</td>
+        </tr>
+      </thead>
+      <br>
+      <tbody formArrayName="gaugeTitles" *ngFor="let item of gaugeTitleFormArray.controls; let i = index;">
+        <tr [formGroupName]="i">
+          <td>
+            <input type="text" *ngIf="!item.get('isEditable')?.value && item.get('selectEmpData')?.value != 'empname'"
+             formControlName="empname"
+              placeholder="Employee Name" name="empname">
+            <br>
+            <span class="validation"
+              *ngIf="item.get('empname')?.invalid && (item.get('empname')?.touched || submitted)">Employee name is
+              required</span>
+            <span *ngIf="item.get('isEditable')?.value">{{item.get('empname')?.value}}</span>
+          </td>
+  
+          <td>
+            <input type="text" *ngIf="!item.get('isEditable')?.value && item.get('selectEmpData')?.value != 'uniname'" formControlName="uniname"
+              placeholder="University Name"><br>
+            <span class="validation"
+              *ngIf="item.get('uniname')?.invalid && (item.get('uniname')?.touched || submitted)">University name is
+              required
+            </span>
+            <span *ngIf="item.get('isEditable')?.value">{{item.get('uniname')?.value}}</span>
+          </td>
+  
+          <td>
+            <input type="text" *ngIf="!item.get('isEditable')?.value && item.get('selectEmpData')?.value != 'result'" formControlName="result" placeholder="Result"><br>
+            <span class="validation"
+              *ngIf="item.get('result')?.invalid && (item.get('result')?.touched || submitted)">Result is required</span>
+            <span *ngIf="item.get('isEditable')?.value">{{item.get('result')?.value}}</span>
+          </td>
+  
+          <td>
+            <input type="text" *ngIf="!item.get('isEditable')?.value && item.get('selectEmpData')?.value != 'yearofpassing'" formControlName="yearofpassing"
+              placeholder="YearofPassing"><br>
+            <span class="validation"
+              *ngIf="item.get('yearofpassing')?.invalid && (item.get('yearofpassing')?.touched || submitted)">Passing Year
+              is required
+            </span>
+            <span *ngIf="item.get('isEditable')?.value">{{item.get('yearofpassing')?.value}}</span>
+          </td>
+  
+          <td>
+            <button *ngIf="!item.get('isEditable')?.value && !isView" type="button" (click)="save(item);">Save</button>
+            <button *ngIf="item.get('isEditable')?.value && !isView" type="button" (click)="onEdit(item)">Edit</button>
+            <button *ngIf="!isView"  type="button" (click)="removeRow(i)">Remove</button>
+            <button *ngIf="!isView" [disabled]="gaugeTitleForm.invalid" [routerLink]="['/view',item.get('id')?.value]">view</button>
+          </td>
+
+          <td>
+            <select *ngIf="!isView"  formControlName="selectEmpData" name="select" id="select" (change)="onChange($event, i)">
+              <option value="none">None</option>
+              <option value="empname">Employee Name</option>
+              <option value="uniname">University Name</option>
+              <option value="result">Result</option>
+              <option value="yearofpassing">Year Of passing</option>
+            </select>
+          </td>
+        </tr>
+        <!-- <tr *ngIf="!item.get('isEditable').value">
+          <td>
+          
+          </td>
+          <td>
+            {{item.get('uniname').value}}
+          </td>
+          <td>
+            {{item.get('result').value}}
+          </td>
+          <td>
+            {{item.get('yearofpassing').value}}
+          </td>
+        </tr> -->
+    </tbody>
+</table>
+</form>
+
